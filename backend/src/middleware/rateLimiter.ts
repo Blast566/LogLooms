@@ -6,6 +6,7 @@ export const ingestionRateLimiter = rateLimit({
   max: 100, 
   standardHeaders: true,
   legacyHeaders: false, 
+  validate: {ip: false},
   keyGenerator: (req) => {
     return req.header('X-API-Key') || req.ip || 'anonymous';
   },

@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # 1. PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: logloom-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: logloom_user
+      POSTGRES_PASSWORD: logloom_password
+      POSTGRES_DB: logloom_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # 2. Redis Pub/Sub Cache
+  redis:
+    image: redis:7-alpine
+    container_name: logloom-redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  # 3. Express Ingestion & SSE Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: logloom-backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgres://logloom_user:logloom_password@postgres:5432/logloom_db
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+
+  # 4. Next.js Admin Dashboard
+  dashboard:
+    build:
+      context: ./logloom-dashboard
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:3000
+    container_name: logloom-dashboard
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

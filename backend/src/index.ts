@@ -1,5 +1,4 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
 import { pool } from './db.js';
 import { validateApiKey } from './middleware/auth.js';
@@ -9,7 +8,7 @@ import format from 'pg-format';
 import { ingestionRateLimiter } from './middleware/rateLimiter.js';
 import { redisPublisher, redisSubscriber } from './redis.js';
 
-dotenv.config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -1,13 +1,19 @@
 import Redis from 'ioredis';
 
-const redisConfig = {
-  host: process.env.REDIS_HOST || '127.0.0.1',
-  port: Number(process.env.REDIS_PORT) || 6379,
-  password: process.env.REDIS_PASSWORD,
-};
+function makeClient(): Redis {
+  if (process.env.REDIS_URL) {
+    return new Redis(process.env.REDIS_URL);
+  }
 
-export const redisPublisher = new Redis(redisConfig);
-export const redisSubscriber = new Redis(redisConfig);
+  return new Redis({
+    host: process.env.REDIS_HOST || '127.0.0.1',
+    port: Number(process.env.REDIS_PORT) || 6379,
+    password: process.env.REDIS_PASSWORD,
+  });
+}
+
+export const redisPublisher = makeClient();
+export const redisSubscriber = makeClient();
 
 for (const [name, client] of [
   ['Publisher', redisPublisher],

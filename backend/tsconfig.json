@@ -5,23 +5,23 @@
     "moduleResolution": "NodeNext",
     "outDir": "./dist",
     "rootDir": "./src",
-    
-    // Type Checking & Security
+
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "skipLibCheck": true,
-    
-    // Source Control & Debugging
+
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-    
-    // Module Interop (Ensures default imports like express & dotenv work properly)
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+    "resolveJsonModule": true,
+
+    "types": ["node"]
   },
   "include": ["src/**/*"]
 }

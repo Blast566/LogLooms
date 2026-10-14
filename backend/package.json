@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch --env-file=.env src/index.ts",
     "build": "tsc",
-    "start": "node --env-file=.env dist/index.js"
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -29,8 +29,7 @@
     "@types/node": "^26.6.5",
     "@types/pg": "^8.23.1",
     "@types/pg-format": "^1.0.5",
-    "dotenv": "^17.4.2",
     "tsx": "^4.23.13",
-    "typescript": "^7.0.2"
+    "typescript": "^5.4.0"
   }
 }

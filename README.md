@@ -194,18 +194,6 @@ Redis Pub/Sub separates ingestion from dashboard delivery. PostgreSQL provides p
 ### Type safety and runtime validation
 TypeScript helps keep data structures consistent across packages. Zod validates incoming payloads at runtime, complementing compile-time type checking.
 
-## Potential Improvements
-
-- Add retry logic with exponential backoff for failed SDK requests.
-- Introduce durable buffering and configurable delivery guarantees.
-- Add pagination and server-side filtering for large log volumes.
-- Add trace IDs and request correlation for debugging distributed requests.
-- Add dashboard authentication and project-level access controls.
-- Implement log retention policies and automated cleanup.
-- Add Docker Compose for one-command local development.
-- Expand automated unit and integration test coverage.
-- Add metrics for ingestion throughput, error rates, and active stream connections.
-- Support event replay when clients reconnect to the SSE stream.
 
 ## What This Project Demonstrates
 
@@ -217,7 +205,3 @@ TypeScript helps keep data structures consistent across packages. Zod validates 
 - Custom SDK design, batching, and buffer management.
 - Process lifecycle handling and failure-aware engineering.
 - Separation of concerns across a multi-package repository.
-
-## License
-
-No license is specified yet. Add a `LICENSE` file if you intend to distribute the project or permit reuse under specific terms.
